@@ -1,60 +1,73 @@
-**Correlation-Based Movie Recommendation System
-Overview**
+Movie Recommendation System using Matrix Factorization (SVD)
+**Overview**
 
-This project implements a user-item collaborative filtering recommendation system using the MovieLens dataset.
-The system recommends movies based on correlation of user ratings, identifying relationships between movies by analyzing rating patterns.
+This project implements a Movie Recommendation System from scratch using Matrix Factorization (MF) with Singular Value Decomposition (SVD).
+The system predicts user preferences for movies by decomposing the user-item interaction matrix into latent factors that capture hidden patterns in the data.
+
+The project was built without using high-level recommendation libraries, to strengthen the understanding of the mathematical foundations behind recommendation systems.
 
 **Features**
 
-Uses MovieLens dataset for user and movie rating data.
+Implemented Matrix Factorization with SVD from scratch.
 
-Computes average ratings and number of ratings per movie.
+Learns latent features for both users and items.
 
-Generates movie-to-movie similarity using Pearson correlation.
+Predicts user ratings for unseen movies.
 
-Provides recommendations for a target movie based on highest correlated movies.
+Handles sparse user-item rating matrices.
 
-**Technologies Used**
+Provides movie recommendations based on predicted ratings.
 
-Python
+**Tech Stack**
 
-Pandas
+Language: Python
 
-NumPy
+**Libraries:**
 
-Matplotlib / Seaborn (for visualization)
+numpy for linear algebra and matrix operations
 
-Jupyter Notebook (development and testing)
-**
-How It Works**
+pandas for dataset handling
 
-Load the MovieLens dataset into a Pandas DataFrame.
+**Dataset**
 
-Group data by movie titles to calculate mean ratings and number of ratings.
+The system was trained and tested using the MovieLens dataset, which contains user ratings for movies.
 
-Build a user-item matrix of ratings.
+Each row contains: userId, movieId, rating, and timestamp.
 
-Compute correlation between movies based on user ratings.
+Movie metadata (title, genres) was used for mapping recommendations to actual movie names.
 
-Return a ranked list of similar movies for a given title.
+Methodology
 
-**Example**
+Data Preprocessing
 
-If the target movie is Star Wars (1977), the system finds other movies that users who liked Star Wars also rated highly, and recommends them in descending order of correlation.
+Constructed a user-item rating matrix from the dataset.
 
-**Usage
-**
-Run the Jupyter Notebook or Python script to:
+Handled missing values by representing them as 0.
 
-Explore data analysis and visualizations.
+Matrix Factorization using SVD
 
-Generate recommendations by providing a target movie name.
+Decomposed the user-item rating matrix into three matrices:
 
-**Future Improvements**
+U (user feature matrix)
 
+Σ (singular values)
 
-Implement matrix factorization methods (SVD, ALS) for deeper recommendation.
+V^T (item feature matrix)
 
-Incorporate additional metadata (genres, tags) for content-based filtering.
+Reduced dimensions to capture latent factors while avoiding noise.
 
-Build a web-based interface for interactive recommendations.
+Prediction
+
+Reconstructed the approximated rating matrix.
+
+Predicted missing ratings based on latent features.
+
+Evaluation
+
+Used Root Mean Squared Error (RMSE) to evaluate prediction accuracy.
+
+Results
+
+Achieved good reconstruction accuracy on the MovieLens dataset.
+
+The system successfully recommends movies to users based on latent features, even if they have not rated those movies before.
